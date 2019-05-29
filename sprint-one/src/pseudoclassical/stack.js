@@ -4,14 +4,30 @@ var Stack = function() {
   this.storage = {};
 };
 
-Stack.prototype.push = function() {
+Stack.prototype.push = function(value) {
+  var self = this.storage;
 
+  var keys = Object.keys(self);
+  var itemCount = keys.length;
+
+  self[itemCount] = value;
 };
 
 Stack.prototype.pop = function() {
+  var self = this.storage;
 
+  var keys = Object.keys(self);
+  var itemCount = keys.length;
+
+  var lastItem = self[itemCount - 1]
+  delete self[itemCount - 1];
+
+  return lastItem;
 };
 
 Stack.prototype.size = function() {
+  var self = this.storage;
 
+  var keys = Object.keys(self);
+  return keys.length;
 };

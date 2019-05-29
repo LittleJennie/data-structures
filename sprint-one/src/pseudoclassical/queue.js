@@ -5,16 +5,36 @@ var Queue = function() {
   this.storage = {};
 };
 
-Queue.prototype.enqueue = function() {
+Queue.prototype.enqueue = function(value) {
+  var self = this.storage;
 
+  var keys = Object.keys(self);
+  var itemCount = keys.length;
+
+  self[itemCount] = value;
 };
 
 Queue.prototype.dequeue = function() {
+  var self = this.storage;
 
+  var firstItem = self[0];
+  delete self[0];
+
+  for (var prop in self) {
+    self[prop - 1] = self[prop];
+    if (!self[prop + 1]) {
+      delete self[prop];
+    }
+  }
+
+  return firstItem;
 };
 
 Queue.prototype.size = function() {
+  var self = this.storage;
 
+  var keys = Object.keys(self);
+  return keys.length;
 };
 
 
