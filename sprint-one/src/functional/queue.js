@@ -15,8 +15,15 @@ var Queue = function() {
 
   someInstance.dequeue = function() {
     var originalFirst = storage[0];
+    delete storage[0];
 
-
+    for (var prop in storage) {
+      var cur = storage[prop];
+      storage[prop-1] = cur;
+      if (storage[prop + 1] === undefined) {
+        delete storage[prop];
+      }
+    }    
 
     return originalFirst;
   };
